@@ -1,44 +1,32 @@
 <template>
 	<div>
-		<div class="d-flex justify-content-between">
-			<div class="d-flex">
-				<div class="input-group input-group-sm mb-3">
-					<span class="input-group-text" id="input-search"><img src='../assets/searchIcon.svg' class="svg-bg"></span>
-					<input type="text" class="form-control" aria-label="search-input" aria-describedby="input-search" @input="search()" v-model="searchText">
-				</div>
+		<div class="d-flex justify-content-between mb-3 mt-3">
+			<div class="search ">
+				<img src='../assets/searchIcon.svg' class="svg-bg">
+				<input type="text" class="form-control" aria-label="search-input" aria-describedby="input-search" @input="search()" v-model="searchText" placeholder="Search">
 			</div>
-			<div class="d-flex">
-				<p type="button" class="txt-sm me-1 mt-1 light-blue">+ Add Employee</p>
-			</div>
+			<div type="button" class="txt-sm me-1 mt-1 light-blue">+ Add Employee</div>
 		</div>
 		<div class="d-flex justify-content-between">
 			<div class="d-flex">
-				<input class="form-check-input mx-1 m-auto" type="checkbox" v-model="selectAllCheckboxEnable" onclick="return false" /><span :class="['ms-1 mx-4 m-auto txt-sm', checkedItems.length ? 'fw-bold': '']">{{checkedItems.length}} Selected</span>
-				<p type="button" class="txt-sm mx-4 m-auto" @click="selectAll()">Select All</p>
-				<div class="d-flex mx-4">
-					<img src='../assets/shareIcon.svg' class="svg-bg image-small">
-					<p type="button" class="txt-sm ms-1 m-auto">Share</p>
-				</div>
-				<div class="d-flex mx-4">
-					<img src='../assets/editIcon.svg' class="svg-bg image-small">
-					<p type="button" class="txt-sm ms-1 m-auto">Edit</p>
-				</div>
-				<div class="d-flex mx-4">
-					<img src='../assets/deleteIcon.svg' class="svg-bg image-small">
-					<p type="button" class="txt-sm ms-1 m-auto">Delete</p>
+				<input class="form-check-input me-1 m-auto" type="checkbox" v-model="selectAllCheckboxEnable" onclick="return false" /><span :class="['ms-1 mx-4 m-auto txt-sm', checkedItems.length ? 'fw-bold': '']">{{checkedItems.length}} Selected</span>
+				<div type="button" class="txt-sm mx-4 m-auto" @click="selectAll()">Select All</div>
+				<div v-for="(option, index) in options" :key="index" class="d-flex mx-4">
+					<img :src="option.icon" class="svg-bg image-small">
+					<div type="button" class="txt-sm ms-1 m-auto">{{option.name}}</div>
 				</div>
 			</div>
 			<div class="d-flex">
-				<div class="d-flex mx-3">
+				<div class="d-flex me-3">
 					<img src='../assets/filter.svg' class="svg-bg image-small">
-					<p type="button" class="txt-sm ms-1 m-auto" @click="filter()" data-bs-toggle="modal" data-bs-target="#filter-madal">Filter</p>
+					<div type="button" class="txt-sm ms-1 m-auto" @click="filter()" data-bs-toggle="modal" data-bs-target="#filter-madal">Filter</div>
 					<!-- Note: Filter not clear to me -->
 				</div>
-				<div class="d-flex mx-4">
+				<div class="d-flex me-4">
 					<img src='../assets/sortDown.svg' class="svg-bg image-small">
-					<p type="button" class="txt-sm ms-1 m-auto" @click="sort()">Sort by</p>
+					<div type="button" class="txt-sm ms-1 m-auto" @click="sort()">Sort by</div>
 				</div>
-				<select class="form-select form-select-sm mx-1" aria-label="select-column" @change="onChange($event)" v-model="selectedColumn">
+				<select class="form-select form-select-sm me-1" aria-label="select-column" @change="onChange($event)" v-model="selectedColumn">
 					<option v-for="(column, index) in $constant.COLUMNS" :key="index" :value="column">{{index}}</option>
 				</select>
 			</div>
@@ -82,7 +70,21 @@ export default {
 			sortAscFlag: true,
 			selectAllCheckboxEnable: false,
 			searchText: "",
-			filterData: []
+			filterData: [],
+			options: [
+				{
+					name: "Share",
+					icon: "/src/assets/shareIcon.svg"
+				},
+				{
+					name: "Edit",
+					icon: "/src/assets/editIcon.svg"
+				},
+				{
+					name: "Delete",
+					icon: "/src/assets/deleteIcon.svg"
+				}
+			]
 		}
 	},
 	watch: {
@@ -136,4 +138,40 @@ export default {
 .txt-sm {
 	font-size: 0.875rem;
 }
+.search {
+    position: relative;
+	width: 30vw;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+	.form-control {
+		height: 45px;
+		text-indent: 25px;
+		border: 2px solid #d6d4d4;
+		& :focus {
+			box-shadow: none;
+   	 		border: none
+		}
+	}
+	img {
+		position: absolute;
+		top: 8px;
+		left: 5px
+	}
+}
+
+// .search input {
+//     height: 60px;
+//     text-indent: 25px;
+//     border: 2px solid #d6d4d4
+// }
+
+// .search input:focus {
+//     box-shadow: none;
+//     border: 2px solid blue
+// }
+// .search .fa-search {
+//     position: absolute;
+//     top: 20px;
+//     left: 16px
+// }
+
 </style>

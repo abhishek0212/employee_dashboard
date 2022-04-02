@@ -1,13 +1,11 @@
 <template>
-	<header class="d-flex justify-content-between">
-		<div class="ms-3 px-3 ">
-			<h3>Employees</h3>
-		</div>
-		<div class="d-flex mx-3 my-1">
+	<header class="d-flex justify-content-between m-1 p-1">
+		<h4 class="ms-4 mb-0">Employees</h4>
+		<div class="d-flex">
 			<img src='../assets/messageIcon.svg' class="px-1 me-1 svg-bg">
 			<img src='../assets/alarm.svg' class="px-1 me-2 svg-bg">
 			<ProfilePicture imageUrl="http://placeimg.com/640/480" classes="d-flex" :showStatus="false"/>
-			<p type="button" class="light-blue" >&#8964;</p>
+			<div type="button" class="light-blue" >&#8964;</div>
 		</div>
 	</header>
 </template>
@@ -16,18 +14,8 @@
 import ProfilePicture from "./ProfilePicture.vue"
 export default {
 	name: 'Navbar',
-	props: {
-		userData: {
-			Type: Object,
-			default: () => {}
-		}
-	},
 	components: {
 		ProfilePicture
-	},
-	data() {
-		return {
-		}
 	}
 }
 </script>

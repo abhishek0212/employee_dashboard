@@ -9,12 +9,6 @@
 export default {
 	name: "ProfilePicture",
 	props: {
-		width: {
-			default: "60%"
-		},
-		height: {
-			default: "30%"
-		},
 		imageUrl: {
 			Type: URL
 		},

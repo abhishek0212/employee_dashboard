@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
 import RestApi from './prototype/RestAPI.js'
 import Constant from './prototype/Constant.js'
 
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.css'
+const app = createApp(App);
 
-Vue.config.productionTip = false
-Vue.prototype.$restApi = new RestApi();
-Vue.prototype.$constant = new Constant();
+app.config.devtools = process.env.NODE_ENV == "production"
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+app.config.globalProperties.$restApi = new RestApi();
+app.config.globalProperties.$constant = new Constant();
+app.use(router);
+
+app.mount("#app");

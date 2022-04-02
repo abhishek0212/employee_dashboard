@@ -5,7 +5,7 @@
 		</div>
 		<div class="flex-grow-1" >
 			<navbar />
-			<router-view />
+			<RouterView />
 		</div>
 	</div>
 </template>
@@ -13,6 +13,7 @@
 <script>
 import SideBar from '@/components/SideBar.vue'
 import Navbar from '@/components/Navbar.vue'
+//import { RouterLink, RouterView } from "vue-router";
 export default {
 	name: 'App',
 	components: { SideBar, Navbar},

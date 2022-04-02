@@ -46,6 +46,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.table {
+	th {
+		text-align: left;
+	}
+	td {
+		text-align: left;
+	}
+}
 .pointer {
 	cursor: pointer;
 }

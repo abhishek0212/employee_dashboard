@@ -1,27 +1,9 @@
 <template>
 	<div class="sidebar d-flex flex-column justify-content-between">
 		<div class="d-flex flex-column center">
-			<div @click="navigate('/message')" :class="['py-2 ps-3 pointer', activePath == '/message' ? 'active' : '']">
-				<img src='../assets/inbox.svg' class="svg-bg">
-			</div>
-			<div @click="navigate('/')" :class="['py-2 ps-3 pointer', activePath == '/' ? 'active' : '']">
-				<img src='../assets/homeicon.svg' class="svg-bg">
-			</div>
-			<div @click="navigate('/application')" :class="['py-2 ps-3 pointer', activePath == '/application' ? 'active' : '']">
-				<img src='../assets/appsIcon.svg' class="svg-bg">
-			</div>
-			<div @click="navigate('/employee')" :class="['py-2 ps-3 pointer', activePath == '/employee' ? 'active' : '']">
-				<img src='../assets/user-group-solid.svg' class="svg-bg">
-			</div>
-			<div @click="navigate('/calendar')" :class="['py-2 ps-3 pointer', activePath == '/calendar' ? 'active' : '']">
-				<img src='../assets/calendarIcon.svg' class="svg-bg">
-			</div>
-			<div @click="navigate('/file')" :class="['py-2 ps-3 pointer', activePath == '/file' ? 'active' : '']">
-				<img src='../assets/fileicon.svg' class="svg-bg">
-			</div>
-			<div @click="navigate('/settings')" :class="['py-2 ps-3 pointer', activePath == '/settings' ? 'active' : '']">
-				<img src='../assets/settingsIcon.svg' class="svg-bg">
-			</div>
+			<router-link v-for="(route, index) in sideBarRoutes" :key="index" :to="route.path" :class="['py-2 ps-3 pointer', this.$route.path == route.path ? 'active' : '']">
+				<img :src="route.svg" class="svg-bg">
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -29,18 +11,40 @@
 <script>
 export default {
 	name: "SideBar",
-	props: {},
 	data() {
 		return {
-			activePath: '/'
+			sideBarRoutes: [
+				{
+					path: "/",
+					svg: "/src/assets/homeicon.svg"
+				},
+				{
+					path: "/message",
+					svg: "/src/assets/inbox.svg"
+				},
+				{
+					path: "/application",
+					svg: "/src/assets/appsIcon.svg"
+				},
+				{
+					path: "/employee",
+					svg: "/src/assets/user-group-solid.svg"
+				},
+				{
+					path: "/calendar",
+					svg: "/src/assets/calendarIcon.svg"
+				},
+				{
+					path: "/file",
+					svg: "/src/assets/fileicon.svg"
+				},
+				{
+					path: "/settings",
+					svg: "/src/assets/settingsIcon.svg"
+				}
+			]
 		}
 	},
-	methods: {
-		navigate(path) {
-			this.activePath = path
-			this.$router.push({path: path})
-		}
-	}
 }
 </script>
 

@@ -77,7 +77,7 @@ export default {
 			if( ! this.checkins[employeeId]) {
 				// Only fetch for new data
 				let data = await this.$restApi.getEmployeeCheckins(employeeId)
-				this.$set(this.checkins, employeeId, data)
+				this.checkins[employeeId] = data
 			}
 		},
 		async getChekin(employeeId, checkinId) {
@@ -98,11 +98,14 @@ export default {
 			this.checkedItems = flag ? this.employees.map((item,index) => index) : []
 		},
 		async getEmployeeList(page = this.page, limit = this.limit, sortBy = this.sortBy, order = this.order, searchStr = this.searchStr, filterData = this.filterData) {
-			let params = {}
-			if(page != -1) {
-				params.p = page
-				params.l = limit
+			let params = {
+				p: page,
+				l: limit
 			}
+			// if(page != -1) {
+			// 	params.p = page
+			// 	params.l = limit
+			// }
 			if(sortBy !== null) {
 				params.sortBy = sortBy
 			}
